@@ -4,14 +4,21 @@
 Download kanji from
 http://www.csus.edu/indiv/s/sheaa/projects/genki/kanji_main.html
 
-for i in {3..12}; do wget http://aitweb.csus.edu/fl/japn/genki_kanji_table.php?lesson=$i; done
+for i in {3..12};
+do
+    wget http://aitweb.csus.edu/fl/japn/genki_kanji_table.php?lesson=$i
+done
 
-for i in {1..145}; do wget http://aitweb.csus.edu/fl/japn/genki_kanji_examples.php?id=$i; done
+for i in {1..145};
+do
+    wget http://aitweb.csus.edu/fl/japn/genki_kanji_examples.php?id=$i
+done
+... and 323 du to a typo in webpage
 """
-import urllib2
 from BeautifulSoup import BeautifulSoup
-import sys
+import urllib2
 import codecs
+import sys
 import os
 from latex_template import *
 
@@ -23,7 +30,6 @@ def printheader(word):
 out = codecs.getwriter('utf-8')(sys.stdout)
 
 class Character:
-#    def __init__(self, kanji, reading, definition,example_url,lesson):
     def __init__(self, character):
         # dictionary
         self.character=character
@@ -89,13 +95,6 @@ class Lesson:
         for i in self.words:
             i.latex()
 
-    def __insert(self,kanji_list):
-        """pass
-        """
-        for i in kanji_list:
-            self.words.append(Character(i[0][0],i[0][1],i[0][2],i[0][3]))
-            self.words[-1].add_example(i[1])
-
     def __parse(self,url,kind=None):
         """pass
         """
@@ -111,7 +110,6 @@ class Lesson:
         rows = table.findAll('tr')
 
         character_list=[]
-        c={}
 
         for r in rows[1:]:
             c={}
@@ -130,7 +128,6 @@ class Lesson:
 
 my_kanji=[]
 for i in range(3,13):
-#for i in range(3,4):
     src='genki_kanji_table.php?lesson='+str(i)
     my_kanji.append(Lesson(src))
 
@@ -139,6 +136,5 @@ for i in my_kanji:
     i.latex()
 #   i.show()
 out.write(latex_post)
-
 
 # vim: set fileencoding=utf-8 expandtab:
