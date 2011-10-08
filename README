@@ -1,0 +1,6 @@
+Tool to generate all Kanji with corresponding reading and definition
+as well as examples. Everything collected from:
+
+http://www.csus.edu/indiv/s/sheaa/projects/genki/kanji_main.html
+
+Output is a nice LaTex document that can be printed.
